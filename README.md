@@ -1,5 +1,8 @@
 # RTL-Pilot: AI-Powered RTL Verification Automation
 
+**Currently first version is still under working, it may not be compiled or run
+当前第一个版本任然正在开发中, 不保证能够正常编译或运行**
+
 RTL-Pilot是一个智能化的RTL验证自动化工具，采用多智能体大语言模型(LLM)架构，自动化测试台生成、Vivado仿真执行、结果评估和工作流编排等验证流程。
 
 ## 🚀 核心特性
@@ -301,23 +304,12 @@ mypy rtl_pilot/
 
 ## 🔗 相关链接
 
-- [文档](https://rtl-pilot.readthedocs.io/)
-- [问题追踪](https://github.com/your-org/RTL-Pilot/issues)
-- [讨论区](https://github.com/your-org/RTL-Pilot/discussions)
+WIP
 
 ## 📧 联系方式
 
-- 项目维护者: [Your Name](mailto:your.email@example.com)
-- 技术支持: [support@rtl-pilot.com](mailto:support@rtl-pilot.com)
+WIP
 
-## 🙏 致谢
-
-感谢以下开源项目和贡献者:
-
-- OpenAI GPT模型
-- Xilinx Vivado工具链
-- Python生态系统
-- 所有贡献者和用户
 
 ---
 
