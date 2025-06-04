@@ -1,0 +1,100 @@
+# RTL-Pilot: Multi-Agent LLM for RTL Verification
+# Requirements file for Python dependencies
+
+# Core dependencies
+pydantic>=2.0.0           # Data validation and configuration
+pydantic-settings>=2.0.0  # Settings management
+jinja2>=3.1.0            # Template engine for testbench generation
+click>=8.0.0             # Command-line interface
+streamlit>=1.28.0        # Web UI framework
+pyyaml>=6.0              # YAML configuration files
+toml>=0.10.2             # TOML configuration support
+
+# LLM and AI dependencies
+openai>=1.0.0            # OpenAI API client
+tiktoken>=0.5.0          # Token counting for OpenAI
+anthropic>=0.8.0         # Anthropic Claude API (optional)
+
+# LangChain ecosystem
+langchain>=0.1.0         # Core LangChain framework
+langchain-openai>=0.1.0  # OpenAI integration
+langchain-anthropic>=0.1.0  # Anthropic integration
+langchain-community>=0.1.0  # Community integrations
+langchain-core>=0.1.0    # Core abstractions
+langsmith>=0.1.0         # LangSmith tracing (optional)
+
+# Tool calling and function integration
+pydantic>=2.0.0          # Enhanced for tool schemas
+
+# Async and concurrency
+asyncio                  # Built-in async support
+aiofiles>=23.0.0         # Async file operations
+asyncio-mqtt>=0.13.0     # Async MQTT (if needed for communication)
+
+# File and data processing
+pathlib                  # Built-in path handling
+glob2>=0.7               # Advanced file pattern matching
+watchdog>=3.0.0          # File system monitoring
+tabulate>=0.9.0          # Table formatting for reports
+
+# Logging and monitoring
+loguru>=0.7.0           # Advanced logging
+rich>=13.0.0            # Rich text and progress bars
+colorama>=0.4.6         # Cross-platform colored terminal text
+
+# Testing dependencies
+pytest>=7.0.0           # Testing framework
+pytest-asyncio>=0.21.0  # Async testing support
+pytest-mock>=3.11.0     # Mocking utilities
+pytest-cov>=4.1.0       # Coverage reporting
+coverage>=7.0.0         # Coverage measurement
+
+# Development dependencies
+black>=23.0.0           # Code formatting
+isort>=5.12.0           # Import sorting
+flake8>=6.0.0           # Linting
+mypy>=1.5.0             # Type checking
+pre-commit>=3.0.0       # Git hooks
+
+# Optional: Web and API dependencies
+fastapi>=0.104.0        # Alternative web framework
+uvicorn>=0.24.0         # ASGI server
+websockets>=11.0.0      # WebSocket support
+httpx>=0.25.0           # HTTP client
+
+# Optional: Database and caching
+sqlite3                 # Built-in database (for caching)
+redis>=4.6.0           # Redis client (optional caching)
+sqlalchemy>=2.0.0      # ORM (optional)
+
+# Optional: Visualization and reporting
+matplotlib>=3.7.0      # Plotting (for coverage visualization)
+plotly>=5.17.0         # Interactive plots
+jinja2-time>=0.2.0     # Time extensions for Jinja2
+
+# Optional: Hardware simulation integration
+pyserial>=3.5          # Serial communication (for hardware-in-the-loop)
+paramiko>=3.3.0        # SSH client (for remote tool execution)
+
+# System and platform dependencies
+psutil>=5.9.0          # System and process utilities
+platform               # Built-in platform detection
+subprocess             # Built-in subprocess management
+tempfile               # Built-in temporary file handling
+shutil                 # Built-in high-level file operations
+
+# Optional: Configuration and secrets management
+python-dotenv>=1.0.0   # Environment variable loading
+keyring>=24.0.0        # Secure credential storage
+cryptography>=41.0.0   # Encryption utilities
+
+# Documentation dependencies (development)
+sphinx>=7.0.0          # Documentation generation
+sphinx-rtd-theme>=1.3.0 # ReadTheDocs theme
+myst-parser>=2.0.0     # Markdown support for Sphinx
+
+# Package building and distribution
+setuptools>=68.0.0     # Package building
+wheel>=0.41.0          # Wheel format support
+twine>=4.0.0           # Package uploading
+build>=0.10.0          # PEP 517 build frontend

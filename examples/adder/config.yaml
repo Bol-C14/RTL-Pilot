@@ -1,0 +1,111 @@
+# RTL-Pilot Configuration for Simple Adder Example
+# This file demonstrates the configuration format for RTL verification projects
+
+project:
+  name: "simple_adder_example"
+  description: "4-bit adder design verification"
+  version: "1.0"
+
+# Design files configuration
+design:
+  rtl_files:
+    - "src/simple_adder.v"
+  
+  testbench_files:
+    - "tb/tb_simple_adder.sv"
+  
+  top_module: "simple_adder"
+  testbench_top: "tb_simple_adder"
+  
+  language: "verilog"
+  hdl_version: "2005"
+
+# Simulation configuration
+simulation:
+  tool: "vivado"
+  target_part: "xc7a35tcpg236-1"
+  simulation_time: "10us"
+  
+  # Simulation options
+  options:
+    - "+define+SIMULATION"
+    - "-timescale=1ns/1ps"
+  
+  # Waveform configuration
+  waveform:
+    format: "vcd"
+    signals:
+      - "tb_simple_adder.a"
+      - "tb_simple_adder.b"
+      - "tb_simple_adder.cin"
+      - "tb_simple_adder.sum"
+      - "tb_simple_adder.cout"
+
+# Verification goals
+verification:
+  coverage_targets:
+    line_coverage: 95
+    branch_coverage: 90
+    toggle_coverage: 85
+  
+  success_criteria:
+    - "no_errors"
+    - "coverage_met"
+    - "timing_clean"
+  
+  # Test scenarios to generate
+  test_scenarios:
+    - name: "basic_functionality"
+      description: "Test basic addition operations"
+      weight: 0.4
+    
+    - name: "corner_cases"
+      description: "Test boundary and edge cases"
+      weight: 0.3
+    
+    - name: "random_tests"
+      description: "Random stimulus testing"
+      weight: 0.3
+
+# LLM configuration for testbench generation
+llm:
+  model: "gpt-4"
+  temperature: 0.1
+  max_tokens: 2000
+  
+  prompts:
+    testbench_generation:
+      template: "verilog_tb.jinja2"
+      context:
+        design_style: "simple"
+        verification_depth: "comprehensive"
+        include_coverage: true
+
+# Tool paths (override defaults if needed)
+tools:
+  vivado_path: null  # Use system default
+  python_path: "python3"
+  
+# Output configuration
+output:
+  reports_dir: "reports"
+  logs_dir: "logs"
+  waveforms_dir: "waves"
+  
+  # Report formats
+  formats:
+    - "text"
+    - "json"
+    - "html"
+
+# Advanced options
+advanced:
+  max_iterations: 5
+  parallel_simulations: 1
+  debug_mode: false
+  
+  # Optimization settings
+  optimization:
+    elaborate_only: false
+    incremental_compile: true
+    fast_simulation: false

@@ -1,0 +1,189 @@
+# RTL-Pilot Configuration for FIFO Example
+# Advanced verification configuration demonstrating protocol testing
+
+project:
+  name: "sync_fifo_example"
+  description: "Synchronous FIFO with comprehensive verification"
+  version: "1.0"
+
+# Design files configuration
+design:
+  rtl_files:
+    - "src/sync_fifo.v"
+  
+  testbench_files:
+    - "tb/tb_sync_fifo.sv"
+  
+  top_module: "sync_fifo"
+  testbench_top: "tb_sync_fifo"
+  
+  language: "systemverilog"
+  hdl_version: "2017"
+
+# Design parameters
+parameters:
+  DATA_WIDTH: 8
+  FIFO_DEPTH: 16
+
+# Simulation configuration
+simulation:
+  tool: "vivado"
+  target_part: "xc7a100tcsg324-1"
+  simulation_time: "100us"
+  
+  # Simulation defines
+  defines:
+    - "SIMULATION"
+    - "FIFO_DEBUG"
+  
+  # Simulation options
+  options:
+    - "-timescale=1ns/1ps"
+    - "+define+SIMULATION"
+  
+  # Waveform configuration
+  waveform:
+    format: "vcd"
+    signals:
+      - "tb_sync_fifo.clk"
+      - "tb_sync_fifo.rst_n"
+      - "tb_sync_fifo.wr_en"
+      - "tb_sync_fifo.wr_data"
+      - "tb_sync_fifo.rd_en"
+      - "tb_sync_fifo.rd_data"
+      - "tb_sync_fifo.full"
+      - "tb_sync_fifo.empty"
+      - "tb_sync_fifo.count"
+
+# Verification goals
+verification:
+  coverage_targets:
+    line_coverage: 98
+    branch_coverage: 95
+    toggle_coverage: 90
+    functional_coverage: 85
+  
+  success_criteria:
+    - "no_errors"
+    - "coverage_met"
+    - "timing_clean"
+    - "protocol_compliance"
+  
+  # Protocol checks
+  protocol_checks:
+    - name: "fifo_overflow"
+      description: "Check for write when full"
+      severity: "error"
+    
+    - name: "fifo_underflow"
+      description: "Check for read when empty"
+      severity: "error"
+    
+    - name: "pointer_consistency"
+      description: "Verify read/write pointer consistency"
+      severity: "error"
+  
+  # Test scenarios for LLM generation
+  test_scenarios:
+    - name: "basic_operations"
+      description: "Test basic read/write operations"
+      weight: 0.2
+      
+    - name: "boundary_conditions"
+      description: "Test full/empty boundary conditions"
+      weight: 0.25
+      
+    - name: "concurrent_operations"
+      description: "Test simultaneous read/write"
+      weight: 0.2
+      
+    - name: "stress_testing"
+      description: "Random high-frequency operations"
+      weight: 0.2
+      
+    - name: "corner_cases"
+      description: "Edge cases and error conditions"
+      weight: 0.15
+
+# LLM configuration for advanced testbench generation
+llm:
+  model: "gpt-4"
+  temperature: 0.1
+  max_tokens: 4000
+  
+  prompts:
+    testbench_generation:
+      template: "verilog_tb.jinja2"
+      context:
+        design_style: "advanced"
+        verification_depth: "comprehensive"
+        include_coverage: true
+        include_assertions: true
+        include_protocols: true
+        use_systemverilog: true
+    
+    feedback_analysis:
+      template: "feedback_loop.jinja2"
+      context:
+        focus_areas:
+          - "protocol_violations"
+          - "coverage_holes"
+          - "timing_issues"
+
+# Advanced verification features
+advanced_verification:
+  # Assertion-based verification
+  assertions:
+    enable: true
+    types:
+      - "overflow_check"
+      - "underflow_check"
+      - "pointer_check"
+      - "count_check"
+  
+  # Functional coverage
+  functional_coverage:
+    enable: true
+    covergroups:
+      - "fifo_states"
+      - "data_patterns"
+      - "operation_sequences"
+  
+  # Constraint random verification
+  constrained_random:
+    enable: true
+    constraints:
+      - "data_range"
+      - "operation_timing"
+      - "sequence_patterns"
+
+# Tool paths
+tools:
+  vivado_path: null
+  python_path: "python3"
+
+# Output configuration
+output:
+  reports_dir: "reports"
+  logs_dir: "logs"
+  waveforms_dir: "waves"
+  coverage_dir: "coverage"
+  
+  # Report formats
+  formats:
+    - "text"
+    - "json"
+    - "html"
+    - "xml"
+
+# Performance and optimization
+performance:
+  max_iterations: 10
+  parallel_simulations: 2
+  optimization_level: "high"
+  
+  # Debug settings
+  debug:
+    enable: false
+    dump_vars: false
+    trace_level: "normal"

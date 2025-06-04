@@ -1,0 +1,130 @@
+# RTL-Pilot 示例配置文件
+# 复制此文件为 config.yaml 并根据您的环境进行调整
+
+# LLM配置
+llm:
+  provider: openai  # 支持: openai, azure, local
+  model: gpt-4      # 或 gpt-3.5-turbo
+  temperature: 0.1
+  max_tokens: 2048
+  api_key: ${OPENAI_API_KEY}  # 从环境变量读取
+  # Azure OpenAI 配置 (如果使用Azure)
+  # azure_endpoint: https://your-resource.openai.azure.com/
+  # azure_deployment: your-deployment-name
+  # api_version: 2023-12-01-preview
+
+# 工具路径配置
+tools:
+  vivado_path: /opt/Xilinx/Vivado/2023.1/bin/vivado
+  # 备选路径 (Windows示例)
+  # vivado_path: C:\Xilinx\Vivado\2023.1\bin\vivado.bat
+  timeout: 300  # 秒
+
+# 工作空间配置
+workspace:
+  base_path: ./workspace
+  temp_dir: /tmp/rtl_pilot  # Linux/macOS
+  # temp_dir: C:\temp\rtl_pilot  # Windows
+  cleanup_temp: true
+  max_workspace_size: 10GB  # 最大工作空间大小
+
+# 验证配置
+verification:
+  default_timeout: 600  # 默认超时时间(秒)
+  max_iterations: 5     # 最大迭代次数
+  coverage_threshold: 80.0  # 覆盖率阈值(%)
+  parallel_jobs: 4      # 并行作业数
+  
+  # 默认覆盖率目标
+  default_targets:
+    line_coverage: 85.0
+    branch_coverage: 80.0
+    toggle_coverage: 75.0
+    functional_coverage: 90.0
+
+# 仿真配置
+simulation:
+  default_time_unit: ns
+  default_simulation_time: 1000ns
+  wave_format: vcd  # 或 wlf, fsdb
+  enable_coverage: true
+  enable_assertions: true
+  
+  # Vivado仿真器特定设置
+  vivado:
+    simulation_mode: behavioral  # 或 post-synthesis, post-implementation
+    debug_mode: false
+    optimization_level: 2
+
+# 报告配置
+reporting:
+  format: html  # 支持: html, pdf, json
+  include_waveforms: true
+  include_coverage_details: true
+  auto_open: false  # 自动打开报告
+
+# 日志配置
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  file: rtl_pilot.log
+  max_size: 10MB
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# 缓存配置
+cache:
+  enable: true
+  directory: ~/.rtl_pilot/cache
+  max_size: 1GB
+  ttl: 86400  # 24小时 (秒)
+
+# 网络配置
+network:
+  proxy: null  # http://proxy.company.com:8080
+  ssl_verify: true
+  timeout: 30
+  retries: 3
+
+# 高级配置
+advanced:
+  # 并行处理
+  enable_parallel_processing: true
+  max_workers: 4
+  
+  # 资源限制
+  memory_limit: 8GB
+  cpu_limit: 80  # 百分比
+  
+  # 实验性功能
+  experimental_features:
+    ai_optimization: false
+    auto_debug: false
+    smart_retry: true
+
+# 项目模板
+templates:
+  default_project:
+    verification_goals:
+      line_coverage_target: 85
+      branch_coverage_target: 80
+      functional_tests: []
+    
+    test_phases:
+      - name: basic
+        coverage_target: 60
+        timeout: 300
+      - name: advanced  
+        coverage_target: 85
+        timeout: 600
+      - name: stress
+        coverage_target: 90
+        timeout: 900
+
+# 插件配置
+plugins:
+  enabled: []
+  # 示例插件配置
+  # custom_generator:
+  #   path: ./plugins/custom_generator.py
+  #   config:
+  #     option1: value1
